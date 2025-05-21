@@ -1,0 +1,115 @@
+ // Set secure session cookie parameters
+                $cookieParams = session_get_cookie_params();
+                setcookie(
+                    session_name(),
+                    session_id(),
+                    [
+                        'lifetime' => time() + 86400,
+                        'path' => '/',
+                        'domain' => $cookieParams['domain'],
+                        'secure' => true,     // Requires HTTPS
+                        'httponly' => true,
+                        'samesite' => 'Strict'
+                    ]
+                );\
+
+
+                  // Basic validation
+    if (empty($email) || empty($password)) {
+        $error = "Please fill in all fields";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Invalid email format";
+    } else {
+
+
+        // Validate inputs
+    if (empty($username) || empty($email) || empty($password)) {
+        $error = "All fields are required";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Invalid email format";
+    } elseif (strlen($password) < 8) {
+        $error = "Password must be at least 8 characters long";
+    } else {
+
+         // if ($checkStmt->rowCount() > 0) {
+            //     $error = "Email already registered";
+            // } else {
+
+                <?php if ($error): ?>
+            <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
+
+
+         <?php if (!empty($error)): ?>
+                <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
+            <?php endif; ?>
+
+
+
+
+               
+        $sql = $connectbd->prepare("SELECT * FROM register WHERE email=:email");
+            $sql->execute([":email" =>$email]);
+            $user = $sql->fetch();
+        if($user && password_verify($password, $user["password"])){
+            // $_SESSION["user_id"] = $user["id"];
+            $_SESSION["username"]= $user["username"];
+            $_SESSION["email"] = $user["email"];
+            // $_SESSION["password"] = $user["password"];
+            echo 'login successfull';
+
+        }else{
+            echo "Invalid email or password";
+        }
+
+    }catch(PDOException $err){
+        echo "error" .$err->getMessage();
+    }
+
+
+
+     if (!$sql) {
+        echo "Error preparing sql.";
+      }
+    $sql->bindParam(1,$email);
+    $sql->execute();
+    $result = $sql->fetch(PDO::FETCH_ASSOC);
+
+    if(!$result){
+        echo "invalid email";
+    }elseif(!($password === $result['password'])){
+      echo "invalid password";
+    }else{
+        $_SESSION["username"] = $username;
+        echo "Login successful";
+    }
+
+   "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> malicious security vulnerability that attack client side used by hackers
+
+   // //register 
+    // $username = $_POST["username"] ?? "";
+    // $email = $_POST["email"] ?? "";
+   //validation
+    //check for the empty field input
+
+
+    // $username = $_POST["username"] ?? "";
+    // $email = $_POST["email"] ?? "";
+   //validation
+    //check for the empty field input
+    if(empty($username)){
+        //handle error 
+        $error[] = "Username is required.";
+        //set the length of the username
+    }elseif(strlen("username") < 3 || strlen("username") > 20){
+        $error[] = "username should be between 5 characters or 20 characters in lenghth.";
+    }
+        if(empty($email)){
+            $error[] = "Email is required.";
+        }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $error[] = "Invalid email format.";
+        }
+    //hashedpassword     //sensetize the input 
+    $username = trim(htmlspecialchars($_POST["username"] ?? ""));
+    $email = trim(filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL)) ?? "";
+   
