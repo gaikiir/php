@@ -76,38 +76,7 @@
 
     </div>
 
-    <script>
-        // get all elements with class "edit-form"
 
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll('.edit-btn').forEach(button => {
-                //handling the edit button
-                button.addEventListener('click', function() {
-                    const articleItem = this.closest('.article-item');
-                    const editForm = articleItem.querySelector('.edit-form');
-                    editForm.classList.toggle('hidden');
-                });
-            })
-
-            //handle the save button
-            document.querySelectorAll('.save-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const articleItem = this.closest('.article-item');
-                    const articleId = articleItem.dataset.id;
-                    const titleInput = articleItem.querySelector('.title-input').value;
-                    const descriptionInput = articleItem.querySelector('.description-input').value;
-                });
-            });
-            // Handle Cancel Button Click
-            document.querySelectorAll('.cancel-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const articleItem = this.closest('.article-item');
-                    const editForm = articleItem.querySelector('.edit-form');
-                    editForm.classList.add('hidden');
-                });
-            });
-        });
-    </script>
 
     <!-- Footer -->
     <footer class="bg-gray-800 mt-12 fixed bottom-0 right-0 left-0">
