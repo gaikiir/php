@@ -16,7 +16,7 @@
 
 
         <!-- Recent Articles Section -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden mb-8">
+        <div class="bg-white shadow-md rounded-lg overflow-hidden mt-16">
             <div class="px-6 py-4 border-b border-gray-200">
                 <h2 class="text-lg font-semibold text-gray-900">Recent Articles</h2>
             </div>
@@ -27,6 +27,7 @@
                     session_start();
                     //connect to database
                     include '../../db/connectdb.php';
+
                     //getting articles from database 
                     try {
                         $stmt = $connectdb->query("SELECT * FROM articles ORDER BY id ASC");
@@ -36,23 +37,19 @@
                         } else {
                             foreach ($articles as $article) {
                                 echo <<<HTML
-                                <div class="flex items-center justify-between py-3 mb-3 ">
+                                <div class="flex items-center justify-between py-3 mb-3 article-item">
                                 <!-- <span data-id="{$article['id']}">{$article['id']}</span> -->
                                     <div>
                                         <h3 class="text-md font-medium text-gray-900">{$article['title']}</h3>
                                         <p class="text-sm text-gray-500 mt-1">{$article['description']}</p>
                                         
                                     </div>
+                                    <!-- /Edit for update content  -->
                                     <div class="flex space-x-2">
-                                        <button class="text-blue-600 hover:text-blue-800">
+                                    <a href="update.php?id={$article['id']}" class="text-blue-600 edit-btn hover:text-blue-800">
                                             <i class="fas fa-edit"></i>
-                                        </button>
-                                        <div class="edit-form hidden mt-3">
-                                        <input type="text" class="w-full p-2 border rounded title-input" value="{$article['title']}">
-                                            <textarea class="w-full p-2 border rounded mt-2 description-input">{$article['description']}</textarea>
-                                            <button class="save-btn mt-2 px-4 py-2 bg-blue-500 text-white rounded">Save</button>
-                                            <button class="cancel-btn mt-2 px-4 py-2 bg-gray-500 text-white rounded ml-2">Cancel</button>
-                                        </div>
+                                        </a>
+                                        <!-- deleting existing data from database -->
                                         <button class="text-red-600 hover:text-red-800">
                                             <i class="fas fa-trash"></i>
                                         </button>
@@ -65,6 +62,13 @@
                     } catch (PDOException $err) {
                         echo "an error occurred while fetching data from server" . $err->getMessage();
                     }
+
+                    //UPDTATE ARTICLE 
+                    // try{
+                    //     $stmt = $connectdb->query("UPDATE articles SET 
+                    //     title = 'new title', description = 'new description' WHERE id = ?");
+                    // }
+                    // 
                     ?>
                 </div>
             </div>
@@ -75,7 +79,6 @@
 
 
     </div>
-
 
 
     <!-- Footer -->
@@ -96,6 +99,7 @@
             </div>
         </div>
     </footer>
+
 </body>
 
 </html>
