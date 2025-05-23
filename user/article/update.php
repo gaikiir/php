@@ -1,6 +1,6 @@
 <?php
 // update.php
-require($_SERVER['DOCUMENT_ROOT'] . '/form/db/connectdb.php'); // Verify this path is correct
+require($_SERVER['DOCUMENT_ROOT'] . '/php/db/connectdb.php'); // Verify this path is correct
 
 // Check if ID is provided and valid
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -57,7 +57,7 @@ $_SESSION['csrf_token'] = $csrf_token;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user Dashboard</title>
+    <title>NewsFlash Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
