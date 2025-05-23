@@ -50,9 +50,12 @@
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <!-- deleting existing data from database -->
-                                        <button class="text-red-600 hover:text-red-800">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <form action="delete_article.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this article?');">
+                                          <input type="hidden" name="delete_id" value="{$article['id']}">
+                                    <button type="submit" class="text-red-600 hover:text-red-800">
+                                     <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
 
                                     </div>
                                 </div>
